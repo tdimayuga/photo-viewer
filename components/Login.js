@@ -1,18 +1,20 @@
-import PropTypes from "prop-types";
-import { useState } from "react";
-import getUserInfo from "./api/LoginApi";
+import PropTypes from 'prop-types'
+import { useState } from 'react'
+import { getUserInfo } from '../pages/api/UsersApi'
 
 const Login = ({ setToken, setUser }) => {
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const result = await getUserInfo(username);
+    e.preventDefault()
+    const result = await getUserInfo(username)
 
-    if(result.length) {
+    if (result.length) {
       setUser(result[0])
+      localStorage.setItem('user-data', JSON.stringify(result[0]))
       setToken(username)
-    } 
+      console.log('here')
+    }
   }
 
   return (
@@ -32,4 +34,4 @@ Login.propTypes = {
   setUser: PropTypes.func,
 }
 
-export default Login;
+export default Login
