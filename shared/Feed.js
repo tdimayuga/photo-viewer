@@ -1,20 +1,12 @@
 import { useEffect, useState } from 'react'
-import { getPosts } from '../pages/api/PostsApi'
 import { getAllUsers } from '../pages/api/UsersApi'
-import PostCard from './PostCard'
+import PostCard from '../components/PostCard'
 
-const Feed = () => {
-  const [posts, setPosts] = useState()
+const Feed = ({ posts }) => {
   const [users, setUsers] = useState()
   useEffect(() => {
-    handleGetPosts()
     handleGetUsers()
   }, [])
-
-  const handleGetPosts = async () => {
-    const response = await getPosts()
-    setPosts(response)
-  }
 
   const handleGetUsers = async () => {
     const response = await getAllUsers()

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { getUserInfo } from '../pages/api/UsersApi'
+import Button from '../shared/Button'
 
 const Login = ({ setToken, setUser }) => {
   const [username, setUsername] = useState()
@@ -24,7 +25,7 @@ const Login = ({ setToken, setUser }) => {
         onChange={(e) => setUsername(e.target.value)}
         placeholder="username"
       />
-      <button type="submit">Submit</button>
+      <Button type="submit" text="Login" />
     </form>
   )
 }
