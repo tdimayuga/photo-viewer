@@ -7,16 +7,14 @@ const PostCreator = ({ userId, name }) => {
   const [postTitle, setPostTitle] = useState('')
   const [postBody, setPostBody] = useState('')
   const [mockPost, setMockPost] = useState()
-  
+
   const handlePostSubmit = async (e) => {
-      e.preventDefault()
-      const response = await createPost(postTitle, postBody, userId)
-      
-          setMockPost(response)
-          console.log("🚀 ~ file: PostCreator.js ~ line 11 ~ PostCreator ~ title", mockPost)
-      setPostTitle('')
-      setPostBody('')
-    
+    e.preventDefault()
+    const response = await createPost(postTitle, postBody, userId)
+
+    setMockPost(response)
+    setPostTitle('')
+    setPostBody('')
   }
 
   return (

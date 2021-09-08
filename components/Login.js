@@ -14,7 +14,6 @@ const Login = ({ setToken, setUser }) => {
       setUser(result[0])
       localStorage.setItem('user-data', JSON.stringify(result[0]))
       setToken(username)
-      console.log('here')
     }
   }
 
