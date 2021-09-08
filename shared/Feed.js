@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react'
 import { getAllUsers } from '../pages/api/UsersApi'
 import PostCard from '../components/PostCard'
+import PostCreator from '../components/PostCreator'
 
-const Feed = ({ posts, comments }) => {
-  const [users, setUsers] = useState()
+const Feed = ({ posts, comments, user, showPostCreator=true}) => {
+  const [postUsers, setPostUsers] = useState()
   useEffect(() => {
     handleGetUsers()
   }, [])
 
   const handleGetUsers = async () => {
     const response = await getAllUsers()
-    setUsers(response)
+    setPostUsers(response)
   }
 
   const getUserName = (userId) => {
-    const result = users
-      && users.filter((user) => user.id === userId) 
+    const result = postUsers
+      && postUsers.filter((user) => user.id === userId) 
     return !!result && Object.assign({}, ...result)
   }
 
@@ -27,15 +28,17 @@ const Feed = ({ posts, comments }) => {
 
   return (
     <div className="Feed">
-      {posts
+    {showPostCreator && <PostCreator user={user} /> }
+      {posts && postUsers
         && posts.map((post, index) => {
           const {userId, id} = post
             return (
               <PostCard
-                user={getUserName(userId)}
+                author={getUserName(userId)}
                 comments={getPostComments(id)}
                 post={post}
                 key={index}
+                user={user}
               />
             )
           })}

@@ -1,15 +1,17 @@
 import { useState } from 'react'
-import PostCard from '../components/PostCard'
+import PostCard from './PostCard'
 import { createPost } from '../pages/api/PostsApi'
-import Button from './Button'
+import Button from '../shared/Button'
 
 const PostCreator = ({ user }) => {
   const [postTitle, setPostTitle] = useState('')
   const [postBody, setPostBody] = useState('')
   const [mockPost, setMockPost] = useState()
   const {id} = user
+
   const handlePostSubmit = async (e) => {
     e.preventDefault()
+    
     const response = await createPost(postTitle, postBody, id)
 
     setMockPost(response)
@@ -18,7 +20,7 @@ const PostCreator = ({ user }) => {
   }
 
   return (
-    <div className="PostForm">
+    <div className="CommentForm">
       <form onSubmit={handlePostSubmit}>
         <input
           type="text"
@@ -35,8 +37,7 @@ const PostCreator = ({ user }) => {
         <Button type="submit" text="Post" />
         </form>
         {/* Added to mock new post data */}
-        {mockPost && <PostCard post={mockPost} user={user} />}
-      {/* </form> */}
+        {mockPost && <PostCard post={mockPost} author={user} user={user} />}
     </div>
   )
 }

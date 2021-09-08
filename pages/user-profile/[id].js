@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import Feed from '../../shared/Feed'
 import Header from '../../components/Header'
 import useToken from '../../components/useToken'
+import Feed from '../../shared/Feed'
 import { getPostsByUser, getPostsComments } from '../api/PostsApi'
 import { getUserInfo, getUserInfoById } from '../api/UsersApi'
-import PostCreator from '../../shared/PostCreator'
 
 const UserProfile = () => {
   const router = useRouter()
@@ -19,20 +18,22 @@ const UserProfile = () => {
   const { token, setToken } = useToken()
   const isLoggedIn = token
   const { profileInfo, profilePosts, postComments } = profileData
-  const { name: profileName } = profileInfo
-  const { name, id: userId } = user
+  const { name: profileName, id: profileId } = profileInfo
+  const { id: userId } = user
+  const isAuthenticatedUserProfile = userId === profileId
 
   useEffect(() => {
     if (!router.isReady) return
-    
+
     !isLoggedIn ? router.push('/') : loadUserProfileInfo()
-  }, [router.isReady, token, id])
+  }, [router.isReady, isLoggedIn, id])
 
   const loadUserProfileInfo = async () => {
     const userInfo = await getUserInfo(token)
     const profileInfo = await getUserInfoById(id)
     const profilePosts = await getPostsByUser(id)
     const postComments = await getPostsComments()
+    
 
     setUser(Object.assign({}, ...userInfo))
     setProfileData({
@@ -44,12 +45,16 @@ const UserProfile = () => {
 
   return (
     <>
-      {isLoggedIn && !!profileData && user && (
+      {isLoggedIn && !!profileData && !!user && (
         <>
           <Header setToken={setToken} id={userId} />
           {profileInfo && <h2>Hello {profileName}</h2>}
-          {userId == id && <PostCreator user={user} />}
-          <Feed posts={profilePosts} comments={postComments} />
+          <Feed
+            posts={profilePosts}
+            comments={postComments}
+            user={user}
+            showPostCreator={isAuthenticatedUserProfile}
+          />
         </>
       )}
     </>
@@ -57,10 +62,3 @@ const UserProfile = () => {
 }
 
 export default UserProfile
-
-const getUrlParam = () => {
-  if (process.browser && 'URLParams' in window) {
-    return new URLSearchParams(decodeURI(window.location.search))
-  }
-  return null
-}

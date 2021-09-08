@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import CommentCreator from './CommentCreator'
 import CommentCard from './CommentCard'
 
-const PostCard = ({ post, user, comments }) => {
+const PostCard = ({ post, author, comments, user }) => {
   const { title, body, id, userId } = post
-  const { name } = user
-  
-  
+  const { name } = author
+
   return (
     <>
       <div className="Post" id={id}>
@@ -19,9 +19,10 @@ const PostCard = ({ post, user, comments }) => {
         </h4>
         <p>{body}</p>
         <div className="Comments">
+          <h4>Comments</h4>
+          <CommentCreator user={user} postId={id} />
           {comments && (
             <>
-              <h4>Comments</h4>
               {comments.map((comment, index) => {
                 return <CommentCard comment={comment} key={index} />
               })}

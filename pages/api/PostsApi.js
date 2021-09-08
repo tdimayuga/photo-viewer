@@ -35,6 +35,7 @@ export async function createPost(title, body, userId) {
   })
   return (await response).json()
 }
+
 export async function getPostsComments() {
   const response = fetch(
     `https://jsonplaceholder.typicode.com/comments`,
@@ -45,5 +46,21 @@ export async function getPostsComments() {
       },
     }
   )
+  return (await response).json()
+}
+
+export async function createComment(comment, name, email, postId) {
+  const response = fetch('https://jsonplaceholder.typicode.com/comments', {
+    method: 'POST',
+    body: JSON.stringify({
+      name: name,
+      body: comment,
+      email: email,
+      postId: postId,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
   return (await response).json()
 }

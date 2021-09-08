@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { getPosts, getPostsComments } from '../pages/api/PostsApi'
 import Feed from '../shared/Feed'
-import PostCreator from '../shared/PostCreator'
 import Header from './Header'
 
 const Homepage = ({ setToken, user }) => {
@@ -30,8 +29,7 @@ const {posts, postComments} = postsData
     <div className="Homepage">
       <Header setToken={setToken} id={id} />
       <h1>Hello {name}!</h1>
-      <PostCreator user={user} />
-      <Feed posts={posts} comments={postComments} />
+      <Feed posts={posts} comments={postComments} user={user} />
     </div>
   )
 }
