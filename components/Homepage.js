@@ -22,7 +22,7 @@ const Homepage = ({ setToken, user }) => {
     <div className="Homepage">
       <Header setToken={setToken} id={id} />
       <h1>Hello {name}!</h1>
-      <Feed />
+      <PostCreator userId={id} name={name}/>
       <Feed posts={posts} />
     </div>
   )
