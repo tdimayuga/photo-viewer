@@ -3,14 +3,14 @@ import PostCard from '../components/PostCard'
 import { createPost } from '../pages/api/PostsApi'
 import Button from './Button'
 
-const PostCreator = ({ userId, name }) => {
+const PostCreator = ({ user }) => {
   const [postTitle, setPostTitle] = useState('')
   const [postBody, setPostBody] = useState('')
   const [mockPost, setMockPost] = useState()
-
+  const {id} = user
   const handlePostSubmit = async (e) => {
     e.preventDefault()
-    const response = await createPost(postTitle, postBody, userId)
+    const response = await createPost(postTitle, postBody, id)
 
     setMockPost(response)
     setPostTitle('')
@@ -18,7 +18,7 @@ const PostCreator = ({ userId, name }) => {
   }
 
   return (
-    <div className="Post">
+    <div className="PostForm">
       <form onSubmit={handlePostSubmit}>
         <input
           type="text"
@@ -33,8 +33,10 @@ const PostCreator = ({ userId, name }) => {
           value={postBody}
         />
         <Button type="submit" text="Post" />
-        {mockPost && <PostCard post={mockPost} name={name} />}
-      </form>
+        </form>
+        {/* Added to mock new post data */}
+        {mockPost && <PostCard post={mockPost} user={user} />}
+      {/* </form> */}
     </div>
   )
 }

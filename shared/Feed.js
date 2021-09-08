@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getAllUsers } from '../pages/api/UsersApi'
 import PostCard from '../components/PostCard'
 
-const Feed = ({ posts }) => {
+const Feed = ({ posts, comments }) => {
   const [users, setUsers] = useState()
   useEffect(() => {
     handleGetUsers()
@@ -14,27 +14,31 @@ const Feed = ({ posts }) => {
   }
 
   const getUserName = (userId) => {
-    return users
-      ? users.map((user) => {
-          const { id, name } = user
-          if (id === userId) return name
-        })
-      : ''
+    const result = users
+      && users.filter((user) => user.id === userId) 
+    return !!result && Object.assign({}, ...result)
+  }
+
+  const getPostComments = (id) => {
+    return comments
+      && comments.filter((comment) => comment.postId === id)
+          
   }
 
   return (
     <div className="Feed">
       {posts
-        ? posts.map((post, index) => {
+        && posts.map((post, index) => {
+          const {userId, id} = post
             return (
               <PostCard
-                name={getUserName(post.userId)}
+                user={getUserName(userId)}
+                comments={getPostComments(id)}
                 post={post}
                 key={index}
               />
             )
-          })
-        : ''}
+          })}
     </div>
   )
 }

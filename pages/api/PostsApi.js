@@ -35,3 +35,15 @@ export async function createPost(title, body, userId) {
   })
   return (await response).json()
 }
+export async function getPostsComments() {
+  const response = fetch(
+    `https://jsonplaceholder.typicode.com/comments`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+  return (await response).json()
+}
