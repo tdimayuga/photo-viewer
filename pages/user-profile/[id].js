@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
+import PhotoFeed from '../../components/PhotoFeed'
 import useToken from '../../components/useToken'
 import Feed from '../../shared/Feed'
+import { getUserAlbums, getUserPhotosByParam } from '../api/PhotosApi'
 import { getPostsByUser, getPostsComments } from '../api/PostsApi'
 import { getUserInfo, getUserInfoById } from '../api/UsersApi'
 
@@ -14,18 +16,23 @@ const UserProfile = () => {
     profilePosts: [],
     postComments: [],
   })
+  const [userPhotos, setUserPhotos] = useState({
+    photos: [],
+    albums: [],
+  })
   const [user, setUser] = useState('')
   const { token, setToken } = useToken()
   const isLoggedIn = token
   const { profileInfo, profilePosts, postComments } = profileData
   const { name: profileName, id: profileId } = profileInfo
   const { id: userId } = user
+  const { photos, albums } = userPhotos
   const isAuthenticatedUserProfile = userId === profileId
-
+  const hasPhotos = photos.length && albums.length
   useEffect(() => {
     if (!router.isReady) return
 
-    !isLoggedIn ? router.push('/') : loadUserProfileInfo()
+    !isLoggedIn ? router.push('/') : loadUserProfileInfo() && loadUserPhotos()
   }, [router.isReady, isLoggedIn, id])
 
   const loadUserProfileInfo = async () => {
@@ -33,7 +40,6 @@ const UserProfile = () => {
     const profileInfo = await getUserInfoById(id)
     const profilePosts = await getPostsByUser(id)
     const postComments = await getPostsComments()
-    
 
     setUser(Object.assign({}, ...userInfo))
     setProfileData({
@@ -43,12 +49,30 @@ const UserProfile = () => {
     })
   }
 
+  const loadUserPhotos = async () => {
+    const userAlbums = await getUserAlbums(id)
+    const photoParams = userAlbums
+      .map((album) => {
+        return `albumId=${album.id}`
+      })
+      .join('&&')
+    const userPhotos = await getUserPhotosByParam(photoParams)
+
+    setUserPhotos({
+      photos: userPhotos,
+      albums: userAlbums,
+    })
+  }
+
   return (
     <>
-      {isLoggedIn && !!profileData && !!user && (
+      {isLoggedIn && profileData && user && userPhotos && (
         <>
           <Header setToken={setToken} id={userId} />
-          {profileInfo && <h2>Hello {profileName}</h2>}
+          <h2>{profileName}</h2>
+          {isAuthenticatedUserProfile && hasPhotos && (
+            <PhotoFeed albums={albums} photos={photos} />
+          )}
           <Feed
             posts={profilePosts}
             comments={postComments}
