@@ -75,8 +75,8 @@ const UserProfile = () => {
 
   return (
     <>
-      <Layout setToken={setToken} user={user} pageName={profileName}>
-        {isLoggedIn && profileData && user && userPhotos && (
+      {isLoggedIn && <Layout setToken={setToken} user={user} pageName={profileName}>
+        {profileData && user && (
           <>
             <h2>{profileName}</h2>
             {isAuthenticatedUserProfile && hasPhotos && (
@@ -104,7 +104,7 @@ const UserProfile = () => {
             )}
           </>
         )}
-      </Layout>
+      </Layout>}
     </>
   )
 }

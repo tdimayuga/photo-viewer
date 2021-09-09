@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Head from 'next/head'
+import { Container } from "react-bootstrap";
 
 export default function Layout({ children, user, setToken, showHeader=true, pageName }) {
   return (
@@ -7,8 +8,8 @@ export default function Layout({ children, user, setToken, showHeader=true, page
       <Head>
         <title>{pageName}</title>
       </Head>
-      {showHeader && <Header setToken={setToken} id={user?.id} />}
-      <main>{children}</main>
+      {showHeader && <Header setToken={setToken} user={user} />}
+      <Container>{children}</Container>
     </>
   )
 }

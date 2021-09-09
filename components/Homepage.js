@@ -27,8 +27,7 @@ const Homepage = ({ setToken, user }) => {
 
   return (
       <div className="Homepage">
-        <h1>Hello {name}!</h1>
-        <Feed posts={posts} comments={postComments} user={user} />
+        {!!posts.length && <Feed posts={posts} comments={postComments} user={user} />}
       </div>
     
   )

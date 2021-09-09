@@ -1,7 +1,9 @@
 import Link from 'next/link'
+import { Container, Navbar, NavDropdown } from 'react-bootstrap'
 import Button from '../shared/Button'
 
-const Header = ({ setToken, id }) => {
+const Header = ({ setToken, user }) => {
+  const {id, name} = user
   const handleLogout = () => {
     setToken('')
     localStorage.removeItem('token')
@@ -9,17 +11,23 @@ const Header = ({ setToken, id }) => {
   }
 
   return (
-    <div className="Header">
-      <Link href="/" passHref>
-        <Button onClick={handleLogout} text="Logout" />
-      </Link>
-      <Link href="/" passHref>
-        <Button text="Home" />
-      </Link>
-      <Link href={`/user-profile/${id}`} passHref>
-        <Button text="Profile" />
-      </Link>
-    </div>
+    <Navbar>
+      <Container>
+        <Navbar.Brand href="/">Home</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <NavDropdown title={`Signed in as: ${name}`} id="basic-nav-dropdown">
+            <NavDropdown.Item href={`/user-profile/${id}`}>
+              Profile
+            </NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="" onClick={handleLogout}>
+              Logout
+            </NavDropdown.Item>
+          </NavDropdown>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   )
 }
 
