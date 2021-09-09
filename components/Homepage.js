@@ -2,15 +2,15 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { getPosts, getPostsComments } from '../pages/api/PostsApi'
 import Feed from '../shared/Feed'
-import Header from './Header'
+import Layout from '../shared/Layout'
 
 const Homepage = ({ setToken, user }) => {
-  const { name, id } = user
-const [postsData, setPostsData] = useState({
-  posts:[],
-  postComments: [],
-})
-const {posts, postComments} = postsData
+  const { name} = user
+  const [postsData, setPostsData] = useState({
+    posts: [],
+    postComments: [],
+  })
+  const { posts, postComments } = postsData
   useEffect(() => {
     handleGetPosts()
   }, [])
@@ -26,11 +26,11 @@ const {posts, postComments} = postsData
   }
 
   return (
-    <div className="Homepage">
-      <Header setToken={setToken} id={id} />
-      <h1>Hello {name}!</h1>
-      <Feed posts={posts} comments={postComments} user={user} />
-    </div>
+      <div className="Homepage">
+        <h1>Hello {name}!</h1>
+        <Feed posts={posts} comments={postComments} user={user} />
+      </div>
+    
   )
 }
 

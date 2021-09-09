@@ -1,30 +1,35 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Homepage from '../components/Homepage'
 import Login from '../components/Login'
 import useToken from '../components/useToken'
 import { isBrowser } from '../services/utils'
-import React from 'react'
+import Layout from '../shared/Layout'
 
 const Home = () => {
   const { token, setToken } = useToken()
-  const initializeUser = () => {
+  const [user, setUser] = useState(initializeUser())
+  const isLoggedIn = !!token
+  function initializeUser() {
     if (isBrowser()) {
       const userData = localStorage.getItem('user-data')
       const user = JSON.parse(userData)
       return user
     }
   }
-  const [user, setUser] = useState(initializeUser())
-  const isLoggedIn = token
 
   return (
-    <>
-      {isLoggedIn ? (
+    <Layout
+      setToken={setToken}
+      user={user}
+      showHeader={isLoggedIn}
+      pageName={'Photo Viewer'}
+    >
+      {isLoggedIn && user ? (
         <Homepage setToken={setToken} user={user} setUser={setUser} />
       ) : (
         <Login setToken={setToken} setUser={setUser} />
       )}
-    </>
+    </Layout>
   )
 }
 
