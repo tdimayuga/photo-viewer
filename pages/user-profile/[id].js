@@ -33,36 +33,36 @@ const UserProfile = () => {
     if (!router.isReady) return
 
     !isLoggedIn ? router.push('/') : loadUserProfileInfo() && loadUserPhotos()
-  }, [router.isReady, isLoggedIn, id])
 
-  const loadUserProfileInfo = async () => {
-    const userInfo = await getUserInfo(token)
-    const profileInfo = await getUserInfoById(id)
-    const profilePosts = await getPostsByUser(id)
-    const postComments = await getPostsComments()
+    async function loadUserProfileInfo() {
+      const userInfo = await getUserInfo(token)
+      const profileInfo = await getUserInfoById(id)
+      const profilePosts = await getPostsByUser(id)
+      const postComments = await getPostsComments()
 
-    setUser(Object.assign({}, ...userInfo))
-    setProfileData({
-      profileInfo: Object.assign({}, ...profileInfo),
-      profilePosts: profilePosts,
-      postComments: postComments,
-    })
-  }
-
-  const loadUserPhotos = async () => {
-    const userAlbums = await getUserAlbums(id)
-    const photoParams = userAlbums
-      .map((album) => {
-        return `albumId=${album.id}`
+      setUser(Object.assign({}, ...userInfo))
+      setProfileData({
+        profileInfo: Object.assign({}, ...profileInfo),
+        profilePosts: profilePosts,
+        postComments: postComments,
       })
-      .join('&&')
-    const userPhotos = await getUserPhotosByParam(photoParams)
+    }
 
-    setUserPhotos({
-      photos: userPhotos,
-      albums: userAlbums,
-    })
-  }
+    async function loadUserPhotos () {
+      const userAlbums = await getUserAlbums(id)
+      const photoParams = userAlbums
+        .map((album) => {
+          return `albumId=${album.id}`
+        })
+        .join('&&')
+      const userPhotos = await getUserPhotosByParam(photoParams)
+
+      setUserPhotos({
+        photos: userPhotos,
+        albums: userAlbums,
+      })
+    }
+  }, [router, isLoggedIn, id, token])
 
   return (
     <>
