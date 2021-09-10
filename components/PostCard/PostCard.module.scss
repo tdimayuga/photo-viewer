@@ -3,6 +3,10 @@
     word-wrap: break-word;
     .authorLabel{
         font-weight: bold;
+        a{
+            text-decoration: none;
+
+        }
     }
     .commentBody{
         margin-top: 20px;

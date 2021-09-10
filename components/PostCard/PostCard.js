@@ -5,7 +5,7 @@ import CommentCard from '../CommentCard'
 import styles from './PostCard.module.scss'
 
 const PostCard = ({ post, author, comments, user }) => {
-  const { title, body, id, userId } = post
+  const { body, id, userId } = post
   const { name } = author
 
   return (
