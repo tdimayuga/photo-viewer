@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import PhotoFeed from '../../components/PhotoFeed'
+import PhotoFeed from '../../components/PhotoFeed/PhotoFeed'
 import useToken from '../../components/useToken'
 import Button from '../../shared/Button'
 import Feed from '../../shared/Feed'

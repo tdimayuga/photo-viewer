@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import Lightbox from 'react-image-lightbox'
 
-const Photo = ({ photo }) => {
+const Photo = ({ photo, width, height }) => {
   const { id, url, thumbnailUrl, title } = photo
   const [state, setState] = useState({ isOpen: false })
   const { isOpen } = state
@@ -13,8 +13,8 @@ const Photo = ({ photo }) => {
         id={id}
         src={thumbnailUrl}
         alt={title}
-        width="50"
-        height="50"
+        width={width}
+        height={height}
         onClick={() => setState({ isOpen: true })}
       />
       {isOpen && (
@@ -25,6 +25,11 @@ const Photo = ({ photo }) => {
       )}
     </>
   )
+}
+
+Photo.defaultProps = {
+  width: '100',
+  height: '100'
 }
 
 export default Photo
