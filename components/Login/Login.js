@@ -1,24 +1,38 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
+import { useCookies } from 'react-cookie'
 import { getUserInfo } from '../../pages/api/UsersApi'
 import Button from '../../shared/Button'
 import styles from './Login.module.scss'
 
-const Login = ({ setToken, setUser }) => {
+const Login = () => {
   const [username, setUsername] = useState()
   const [invalidUser, setInvalidUser] = useState(false)
+  const [cookie, setCookie] = useCookies(['user'])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const result = await getUserInfo(username)
-    const data = result[0]
-
-    if (data) {
-      setUser(data)
-      localStorage.setItem('user-data', JSON.stringify(data))
-      setToken(username)
-    } else {
-      setInvalidUser(true)
+    
+    try {
+      const result = await getUserInfo(username)
+      const data = result[0]
+      if (data) {
+        console.log('')
+        setCookie('user', JSON.stringify(data), {
+          path: '/',
+          maxAge: 3600, // Expires after 1hr
+          sameSite: true,
+        })
+        setCookie('token', JSON.stringify(username), {
+          path: '/',
+          maxAge: 3600, // Expires after 1hr
+          sameSite: true,
+        })
+      } else {
+        setInvalidUser(true)
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 

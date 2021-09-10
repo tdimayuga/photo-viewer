@@ -1,12 +1,14 @@
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { useCookies, withCookies, Cookies } from 'react-cookie'
 import styles from './Header.module.scss'
+import { instanceOf } from 'prop-types'
 
-const Header = ({ setToken, user }) => {
+const Header = ({ user }) => {
+  const [, removeCookie] = useCookies()
   const { id, name } = user
   const handleLogout = () => {
-    setToken('')
-    localStorage.removeItem('token')
-    localStorage.removeItem('user-data')
+    removeCookie('token', '', { path: '/' })
+    removeCookie('user', '', { path: '/' })
   }
 
   return (
@@ -31,7 +33,7 @@ const Header = ({ setToken, user }) => {
                 <NavDropdown.Divider />
                 <NavDropdown.Item
                   className={styles.dropdownMenu}
-                  href=""
+                  href="/"
                   onClick={handleLogout}
                 >
                   Logout
@@ -44,5 +46,6 @@ const Header = ({ setToken, user }) => {
     </div>
   )
 }
+
 
 export default Header

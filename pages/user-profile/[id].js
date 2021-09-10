@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Tab, Tabs } from 'react-bootstrap'
+import { useCookies } from 'react-cookie'
 import PhotoFeed from '../../components/PhotoFeed/PhotoFeed'
-import useToken from '../../components/useToken'
 import { isEmpty } from '../../services/utils'
 import Feed from '../../shared/Feed'
 import Layout from '../../shared/Layout'
@@ -11,6 +11,8 @@ import { getPostsByUser, getPostsComments } from '../api/PostsApi'
 import { getUserInfo, getUserInfoById } from '../api/UsersApi'
 
 const UserProfile = () => {
+  const [cookies] = useCookies()
+
   const router = useRouter()
   const { id } = router.query
   const [profileData, setProfileData] = useState({
@@ -23,9 +25,9 @@ const UserProfile = () => {
     albums: [],
   })
   const [user, setUser] = useState('')
-  const { token, setToken } = useToken()
   const [feedSelector, setFeedSelector] = useState({ isPostFeed: true })
-  const isLoggedIn = token
+  const token = cookies?.token
+  const isLoggedIn = !!cookies?.token
   const { profileInfo, profilePosts, postComments } = profileData
 
   const { name: profileName, id: profileId } = profileInfo
@@ -73,7 +75,7 @@ const UserProfile = () => {
   return (
     <>
       {isLoggedIn && !isEmpty(user) && !isEmpty(profileInfo) && (
-        <Layout setToken={setToken} user={user} pageName={profileName}>
+        <Layout user={user} pageName={profileName}>
           <>
             <h2>{profileName}</h2>
             <Tabs

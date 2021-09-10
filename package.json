@@ -1,6 +1,6 @@
 {
   "name": "photo-viewer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,9 +11,11 @@
   "dependencies": {
     "bootstrap": "^5.1.1",
     "classnames": "^2.3.1",
+    "cookie": "^0.4.1",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-bootstrap": "^2.0.0-beta.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "17.0.2",
     "react-image-lightbox": "^5.1.4",
     "sass": "^1.39.1"
