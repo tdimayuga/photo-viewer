@@ -29,7 +29,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 When you first open [http://localhost:3000](http://localhost:3000), you will be presented with a `login` page.
 
-Use one of the following usernames to login:
+![Login](.config/images/photo-viewer-login.gif  'Login')
+
+Use one of the following `usernames` to login:
+
 * Bret
 * Antonette
 * Samantha
@@ -41,11 +44,15 @@ Use one of the following usernames to login:
 * Delphine
 * Moriah.Stanton
 
-![Login](.config/images/photo-viewer-login.gif  'Login')
+**`NOTE!` Usernames are case-sensitive**
 
 
-Once logged in, you will be able to create a new post, view posts, and comment on them.
 
+
+Once logged in, you will be able to create a new post, view posts, and comment on them. 
 You will also have access to your own profile as well as other users' profile, with limited access on the latter.
 
-On your own profile, you will have access to a feed of your posts and photos. 
+On your own profile, you will have access to a feed of your posts, user information and photos. 
+
+You will be able to access other users' profiles by viewing their posts and clicking their name.
+You will not have access to others' photos, address and phone number.
