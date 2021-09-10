@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
-import PostCard from '../components/PostCard'
+import PostCard from '../components/PostCard/PostCard'
 import PostCreator from '../components/PostCreator/PostCreator'
 import { getAllUsers } from '../pages/api/UsersApi'
 

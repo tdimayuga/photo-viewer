@@ -1,32 +1,34 @@
 .postCreator {
-    margin-bottom: 10px;
-}
-.form {
-  width: 500px;
-  margin: 0 auto;
+  margin-bottom: 20px;
 
-  .titleInput {
-    width: 400px;
-    margin: inherit
-  }
-  
-  .bodyInput {
-    width: 400px;
-    height: 100px;
-    margin: inherit;
-  }
+  .form {
+    width: 500px;
+    margin: 0 auto;
 
-}
-.formBtn {
-    margin-top: 10px;
-    text-align: center;
-    .divider{
-        width:30px;
-    height:auto;
-    display:inline-block;
+    .titleInput {
+      width: 400px;
+      margin: inherit;
     }
-    button{
+
+    .bodyInput {
+      width: 400px;
+      height: 100px;
+      margin: inherit;
+    }
+    textarea {
+      resize: none;
+    }
+    .formBtn {
+      margin-top: 10px;
+      text-align: center;
+      .divider {
+        width: 30px;
+        height: auto;
+        display: inline-block;
+      }
+      button {
         width: 65px;
+      }
     }
+  }
 }
-

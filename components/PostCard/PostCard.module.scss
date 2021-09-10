@@ -1,0 +1,11 @@
+.postCard{
+    width:inherit;
+    word-wrap: break-word;
+    .authorLabel{
+        font-weight: bold;
+    }
+    .commentBody{
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+}

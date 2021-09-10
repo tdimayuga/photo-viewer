@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import PostCard from '../PostCard'
+import PostCard from '../PostCard/PostCard'
 import { createPost } from '../../pages/api/PostsApi'
 import Button from '../../shared/Button'
 import styles from './PostCreator.module.scss'
@@ -52,15 +52,15 @@ const PostCreator = ({ user }) => {
           <div className={styles.formBtn}>
             <Button
               className={`btn btn-outline-dark `}
-              onClick={(e) => handleClear(e)}
-              text="Clear"
+              type="submit"
+              onClick={(e) => handlePostSubmit(e)}
+              text="Post"
             />
             <div className={styles.divider}></div>
             <Button
               className={`btn btn-outline-dark `}
-              type="submit"
-              onClick={(e) => handlePostSubmit(e)}
-              text="Post"
+              onClick={(e) => handleClear(e)}
+              text="Clear"
             />
           </div>
         </form>

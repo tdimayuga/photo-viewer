@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import CommentCreator from './CommentCreator'
-import CommentCard from './CommentCard'
+import CommentCreator from '../CommentCreator'
+import CommentCard from '../CommentCard'
+import styles from './PostCard.module.scss'
 
 const PostCard = ({ post, author, comments, user }) => {
   const { title, body, id, userId } = post
@@ -9,23 +10,28 @@ const PostCard = ({ post, author, comments, user }) => {
 
   return (
     <>
-      <div className="Post" id={id}>
-        <h3>{title}</h3>
-        <h4>
+      <div className={styles.postCard} id={id}>
+        <div className={styles.authorLabel}>
           by:{' '}
           <Link href={`/user-profile/${userId}`}>
             <a>{name}</a>
           </Link>
-        </h4>
-        <p>{body}</p>
+        </div>
+        <p className={styles.commentBody}>{body}</p>
         <div className="Comments">
           <h4>Comments</h4>
           <CommentCreator user={user} postId={id} />
           {comments && (
             <>
-              {comments.map((comment, index) => {
-                return <CommentCard comment={comment} key={index} />
-              })}
+              <ul className="list-group">
+                {comments.map((comment, index) => {
+                  return (
+                    <li className="list-group-item" key={index}>
+                      <CommentCard comment={comment} />
+                    </li>
+                  )
+                })}
+              </ul>
             </>
           )}
         </div>

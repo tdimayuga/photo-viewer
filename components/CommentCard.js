@@ -5,12 +5,11 @@ const CommentCard = ({ comment }) => {
 
   return (
     <>
-      <div className="Comment">
-        <h5>
+      
+        <h6>
           {name}:
-        </h5>
+        </h6>
         <p>{body}</p>
-      </div>
     </>
   )
 }
