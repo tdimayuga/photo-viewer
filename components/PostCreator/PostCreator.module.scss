@@ -1,17 +1,20 @@
 .postCreator {
+  width: inherit;
   margin-bottom: 20px;
 
-  .form {
-    width: 500px;
+   .form {
+    width:100%;
     margin: 0 auto;
 
     .titleInput {
-      width: 400px;
+      width: inherit;
+      max-width: 400px;
       margin: inherit;
     }
 
     .bodyInput {
-      width: 400px;
+      width: inherit;
+      max-width: 400px;
       height: 100px;
       margin: inherit;
     }

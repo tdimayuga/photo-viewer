@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Container } from 'react-bootstrap'
 import Accordion from 'react-bootstrap/Accordion'
 import PostCard from '../components/PostCard/PostCard'
 import PostCreator from '../components/PostCreator/PostCreator'
@@ -25,29 +26,30 @@ const Feed = ({ posts, comments, user, showPostCreator = true }) => {
   }
 
   return (
-    <div className="Feed">
+    <Container>
       {showPostCreator && <PostCreator user={user} />}
       {!!postUsers?.length && (
-        <Accordion>
-          {posts.map((post, index) => {
-            const { userId, id, title } = post
-            return (
-              <Accordion.Item eventKey={index} key={index}>
-                <Accordion.Header>{title}</Accordion.Header>
-                <Accordion.Body>
-                  <PostCard
-                    author={getUserName(userId)}
-                    comments={getPostComments(id)}
-                    post={post}
-                    user={user}
-                  />
-                </Accordion.Body>
-              </Accordion.Item>
-            )
-          })}
-        </Accordion>
+          <Accordion>
+            {posts.map((post, index) => {
+              const { userId, id, title } = post
+              return (
+                <Accordion.Item eventKey={index} key={index}>
+                  <Accordion.Header>{title}</Accordion.Header>
+                  <Accordion.Body>
+                    <PostCard
+                      author={getUserName(userId)}
+                      comments={getPostComments(id)}
+                      post={post}
+                      user={user}
+                    />
+                  </Accordion.Body>
+                </Accordion.Item>
+              )
+            })}
+          </Accordion>
+        
       )}
-    </div>
+    </Container>
   )
 }
 

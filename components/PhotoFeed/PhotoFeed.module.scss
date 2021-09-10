@@ -3,7 +3,8 @@
 }
 
 .albumList {
-  width: 500px;
+  width: inherit;
+  max-width: 500px;
   text-align: center;
 h4{
     text-align: left;
