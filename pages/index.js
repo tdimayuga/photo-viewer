@@ -24,8 +24,8 @@ const Home = () => {
       showHeader={isLoggedIn}
       pageName={'Photo Viewer'}
     >
-      {isLoggedIn && user ? (
-        <Homepage setToken={setToken} user={user} setUser={setUser} />
+      {isLoggedIn ? (
+        <Homepage user={user}  />
       ) : (
         <Login setToken={setToken} setUser={setUser} />
       )}

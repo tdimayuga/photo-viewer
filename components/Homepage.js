@@ -2,10 +2,8 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { getPosts, getPostsComments } from '../pages/api/PostsApi'
 import Feed from '../shared/Feed'
-import Layout from '../shared/Layout'
 
-const Homepage = ({ setToken, user }) => {
-  const { name} = user
+const Homepage = ({ user }) => {
   const [postsData, setPostsData] = useState({
     posts: [],
     postComments: [],
@@ -27,7 +25,7 @@ const Homepage = ({ setToken, user }) => {
 
   return (
       <div className="Homepage">
-        {!!posts.length && <Feed posts={posts} comments={postComments} user={user} />}
+         <Feed posts={posts} comments={postComments} user={user} />
       </div>
     
   )

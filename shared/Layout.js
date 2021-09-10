@@ -1,6 +1,7 @@
 import Header from "../components/Header/Header";
 import Head from 'next/head'
 import { Container } from "react-bootstrap";
+import { isEmpty } from "../services/utils";
 
 export default function Layout({ children, user, setToken, showHeader=true, pageName }) {
   return (
@@ -8,7 +9,7 @@ export default function Layout({ children, user, setToken, showHeader=true, page
       <Head>
         <title>{pageName}</title>
       </Head>
-      {showHeader && <Header setToken={setToken} user={user} />}
+      {showHeader && !isEmpty(user) && <Header setToken={setToken} user={user} />}
       <Container>{children}</Container>
     </>
   )

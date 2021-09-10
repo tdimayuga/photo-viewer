@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Tab, Tabs } from 'react-bootstrap'
 import PhotoFeed from '../../components/PhotoFeed/PhotoFeed'
 import useToken from '../../components/useToken'
-import Button from '../../shared/Button'
+import { isEmpty } from '../../services/utils'
 import Feed from '../../shared/Feed'
 import Layout from '../../shared/Layout'
 import { getUserAlbums, getUserPhotosByParam } from '../api/PhotosApi'
@@ -27,6 +27,7 @@ const UserProfile = () => {
   const [feedSelector, setFeedSelector] = useState({ isPostFeed: true })
   const isLoggedIn = token
   const { profileInfo, profilePosts, postComments } = profileData
+
   const { name: profileName, id: profileId } = profileInfo
   const { id: userId } = user
   const { photos, albums } = userPhotos
@@ -69,38 +70,32 @@ const UserProfile = () => {
     }
   }, [router, isLoggedIn, id, token, isPostFeed])
 
-  const handleFeedChange = (isPosts) => {
-    return isPostFeed !== isPosts && setFeedSelector({ isPostFeed: isPosts })
-  }
-
   return (
     <>
-      {isLoggedIn && (
+      {isLoggedIn && !isEmpty(user) && !isEmpty(profileInfo) && (
         <Layout setToken={setToken} user={user} pageName={profileName}>
-          {profileData && user && (
-            <>
-              <h2>{profileName}</h2>
-              <Tabs
-                defaultActiveKey="post"
-                id="uncontrolled-tab-example"
-                className="mb-3"
-              >
-                <Tab eventKey="post" title="Posts">
-                  <Feed
-                    posts={profilePosts}
-                    comments={postComments}
-                    user={user}
-                    showPostCreator={isAuthenticatedUserProfile}
-                  />
+          <>
+            <h2>{profileName}</h2>
+            <Tabs
+              defaultActiveKey="post"
+              id="uncontrolled-tab-example"
+              className="mb-3"
+            >
+              <Tab eventKey="post" title="Posts">
+                <Feed
+                  posts={profilePosts}
+                  comments={postComments}
+                  user={user}
+                  showPostCreator={isAuthenticatedUserProfile}
+                />
+              </Tab>
+              {isAuthenticatedUserProfile && hasPhotos && (
+                <Tab eventKey="photos" title="Photos">
+                  <PhotoFeed albums={albums} photos={photos} />
                 </Tab>
-                {isAuthenticatedUserProfile && hasPhotos && (
-                  <Tab eventKey="photos" title="Photos">
-                    <PhotoFeed albums={albums} photos={photos} />
-                  </Tab>
-                )}
-              </Tabs>
-            </>
-          )}
+              )}
+            </Tabs>
+          </>
         </Layout>
       )}
     </>
