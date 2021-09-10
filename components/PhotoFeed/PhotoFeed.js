@@ -23,6 +23,7 @@ const PhotoFeed = ({ albums, photos }) => {
     <div className={styles.photoFeed}>
       {albums && !showPhotos && (
         <div className={`list-group ${styles.albumList}`}>
+        <h4>Albums</h4>
           {albums.map((album, index) => {
             const { id, title } = album
             return (
