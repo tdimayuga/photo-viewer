@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Photo Viewer
 
 ## Getting Started
 
-First, run the development server:
+Before getting started, make sure you have the latest version (`v16.8.0`) of [NodeJs](https://nodejs.org/en) installed.
+
+`Recommended` [Visual Studio Code](https://code.visualstudio.com/)
+To properly view this file in [Visual Studio Code](https://code.visualstudio.com/), do the following: press "CTRL+SHIFT+P" then choose "Markdown: Open Preview"
+
+Run the following commands on your favorite command line tool:
+
+- For the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
+photo-viewer> npm install
+photo-viewer> npm run dev
+```
+
+- For the production server:
+
+```bash
+photo-viewer> npm run build
+photo-viewer> npm run start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## How To Use
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+When you first open [http://localhost:3000](http://localhost:3000), you will be presented with a `login` page.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Use one of the following usernames to login:
+* Bret
+* Antonette
+* Samantha
+* Karianne
+* Kamren
+* Leopoldo_Corkery
+* Elwyn.Skiles
+* Maxime_Nienow
+* Delphine
+* Moriah.Stanton
 
-## Learn More
+![Login](.config/images/photo-viewer-login.gif  'Login')
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Once logged in, you will be able to create a new post, view posts, and comment on them.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+You will also have access to your own profile as well as other users' profile, with limited access on the latter.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+On your own profile, you will have access to a feed of your posts and photos. 
