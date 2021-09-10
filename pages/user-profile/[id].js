@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { Tab, Tabs } from 'react-bootstrap'
 import PhotoFeed from '../../components/PhotoFeed/PhotoFeed'
 import useToken from '../../components/useToken'
 import Button from '../../shared/Button'
@@ -74,36 +75,34 @@ const UserProfile = () => {
 
   return (
     <>
-      {isLoggedIn && <Layout setToken={setToken} user={user} pageName={profileName}>
-        {profileData && user && (
-          <>
-            <h2>{profileName}</h2>
-            {isAuthenticatedUserProfile && hasPhotos && (
-              <>
-                <Button
-                  disabled={isPostFeed}
-                  onClick={() => handleFeedChange(true)}
-                  text="Posts"
-                />
-                <Button
-                  disabled={!isPostFeed}
-                  onClick={() => handleFeedChange(false)}
-                  text="Photos"
-                />
-                {!isPostFeed && <PhotoFeed albums={albums} photos={photos} />}
-              </>
-            )}
-            {isPostFeed && (
-              <Feed
-                posts={profilePosts}
-                comments={postComments}
-                user={user}
-                showPostCreator={isAuthenticatedUserProfile}
-              />
+      {isLoggedIn && (
+        <Layout setToken={setToken} user={user} pageName={profileName}>
+          {profileData && user && (
+            <>
+              <h2>{profileName}</h2>
+              <Tabs
+                defaultActiveKey="post"
+                id="uncontrolled-tab-example"
+                className="mb-3"
+              >
+                <Tab eventKey="post" title="Posts">
+                  <Feed
+                    posts={profilePosts}
+                    comments={postComments}
+                    user={user}
+                    showPostCreator={isAuthenticatedUserProfile}
+                  />
+                </Tab>
+                {isAuthenticatedUserProfile && hasPhotos && (
+                  <Tab eventKey="photos" title="Photos">
+                    <PhotoFeed albums={albums} photos={photos} />
+                  </Tab>
+                )}
+              </Tabs>
+            </>
           )}
-          </>
-        )}
-      </Layout>}
+        </Layout>
+      )}
     </>
   )
 }
