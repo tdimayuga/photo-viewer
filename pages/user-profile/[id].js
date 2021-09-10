@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Tab, Tabs } from 'react-bootstrap'
 import { useCookies } from 'react-cookie'
+import AboutSection from '../../components/AboutSection/AboutSection'
 import PhotoFeed from '../../components/PhotoFeed/PhotoFeed'
 import { isEmpty } from '../../services/utils'
 import Feed from '../../shared/Feed'
@@ -89,6 +90,12 @@ const UserProfile = () => {
                   comments={postComments}
                   user={user}
                   showPostCreator={isAuthenticatedUserProfile}
+                />
+              </Tab>
+              <Tab eventKey="about" title="About">
+                <AboutSection
+                  profileInfo={profileInfo}
+                  isAuthenticatedUserProfile={isAuthenticatedUserProfile}
                 />
               </Tab>
               {isAuthenticatedUserProfile && hasPhotos && (
