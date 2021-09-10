@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Homepage from '../components/Homepage'
-import Login from '../components/Login'
+import Login from '../components/Login/Login'
 import useToken from '../components/useToken'
 import { isBrowser } from '../services/utils'
 import Layout from '../shared/Layout'

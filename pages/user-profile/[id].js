@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import Header from '../../components/Header'
 import PhotoFeed from '../../components/PhotoFeed'
 import useToken from '../../components/useToken'
 import Button from '../../shared/Button'
@@ -101,7 +100,7 @@ const UserProfile = () => {
                 user={user}
                 showPostCreator={isAuthenticatedUserProfile}
               />
-            )}
+          )}
           </>
         )}
       </Layout>}

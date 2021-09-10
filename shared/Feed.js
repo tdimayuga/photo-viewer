@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import PostCard from '../components/PostCard'
-import PostCreator from '../components/PostCreator'
+import PostCreator from '../components/PostCreator/PostCreator'
 import { getAllUsers } from '../pages/api/UsersApi'
 
 const Feed = ({ posts, comments, user, showPostCreator = true }) => {

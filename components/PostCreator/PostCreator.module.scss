@@ -1,0 +1,32 @@
+.postCreator {
+    margin-bottom: 10px;
+}
+.form {
+  width: 500px;
+  margin: 0 auto;
+
+  .titleInput {
+    width: 400px;
+    margin: inherit
+  }
+  
+  .bodyInput {
+    width: 400px;
+    height: 100px;
+    margin: inherit;
+  }
+
+}
+.formBtn {
+    margin-top: 10px;
+    text-align: center;
+    .divider{
+        width:30px;
+    height:auto;
+    display:inline-block;
+    }
+    button{
+        width: 65px;
+    }
+}
+
